@@ -33,7 +33,7 @@ It means a sweeping. A Light Attack needs to move slower then the Heavy Attack.
 > Sweeping: It means starts at 0deg, moves towards the target and ends at 180deg (of the opposite side).
 
 #### Heavy Attack
-It consists of 2 stages. First, it start at 0 deg and pausing at 40deg (charging for 2 seconds) until the player releases the Heavy Attack button.
+It consists of 2 stages. First, it start at 0 deg and pausing at 40deg (charging for 2 seconds) until the player releases the Heavy Attack button. (If it is at 180 deg then it will pausing at 140 deg)
 
 While performing the heavy attack, you should also use LEDs to indicate the charging status as shown:
 
