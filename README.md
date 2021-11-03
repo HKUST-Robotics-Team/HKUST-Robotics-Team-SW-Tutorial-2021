@@ -72,33 +72,43 @@
 
 ## Schedule
 
-|         | Sunday | Monday      | Tuesday     | Wednesday   | Thursday    | Friday      | Satuarday |
-| ------- | ------ | ----------- | ----------- | ----------- | ----------- | ----------- | --------- |
-| Date    | 26/9   | 27/9        | 28/9        | 29/9        | 30/9        | 1/10        | 2/10      |
-| Event   |        |             |             | Tutorial 1  | Tutorial 1  |             |           |
-| Time    |        |             |             | 1900 ~ 2200 | 1900 ~ 2200 |             |           |
-| Session |        |             |             | Session 3   | Session 4   |             |           |
-| Venue   |        |             |             | 4219        | 6602        |             |           |
-| Date    | 3/10   | 4/10        | 5/10        | 6/10        | 7/10        | 8/10        | 9/10      |
-| Event   |        | Tutorial 1  | Tutorial 1  | Tutorial 2  | Tutorial 2  |             |           |
-| Time    |        | 1900 ~ 2200 | 1900 ~ 2200 | 1900 ~ 2200 | 1900 ~ 2200 |             |           |
-| Session |        | Session 1   | Session 2   | Session 3   | Session 4   |             |           |
-| Venue   |        | 6602        | 6602        | 4219        | 6602        |             |           |
-| Date    | 10/10  | 11/10       | 12/10       | 13/10       | 14/10       | 15/10       | 16/10     |
-| Event   |        | Tutorial 2  | Tutorial 2  | Tutorial 3  |             | Tutorial 3  |           |
-| Time    |        | 1900 ~ 2200 | 1900 ~ 2200 | 1900 ~ 2200 |             | 1900 ~ 2200 |           |
-| Session |        | Session 1   | Session 2   | Session 3   |             | Session 4   |           |
-| Venue   |        | 4219        | 6602        | 4219        |             | 6602        |           |
-| Date    | 17/10  | 18/10       | 19/10       | 20/10       | 21/10       | 22/10       | 23/10     |
-| Event   |        | Tutorial 3  | Tutorial 3  | Tutorial 4  | Tutorial 4  |             |           |
-| Time    |        | 1900 ~ 2200 | 1900 ~ 2200 | 1900 ~ 2200 | 1900 ~ 2200 |             |           |
-| Session |        | Session 1   | Session 2   | Session 3   | Session 4   |             |           |
-| Venue   |        | 4219        | 6602        | 4219        | 6602        |             |           |
-| Date    | 24/10  | 25/10       | 26/10       | 27/10       | 28/10       | 29/10       | 30/10     |
-| Event   |        | Tutorial 4  | Tutorial 4  |             |             |             |           |
-| Time    |        | 1900 ~ 2200 | 1900 ~ 2200 |             |             |             |           |
-| Session |        | Session 1   | Session 2   |             |             |             |           |
-| Venue   |        | 4219        | 6602        |             |             |             |           |
+|         | Sunday | Monday      | Tuesday            | Wednesday   | Thursday           | Friday      | Satuarday |
+| ------- | ------ | ----------- | ------------------ | ----------- | ------------------ | ----------- | --------- |
+| Date    | 26/9   | 27/9        | 28/9               | 29/9        | 30/9               | 1/10        | 2/10      |
+| Event   |        |             |                    | Tutorial 1  | Tutorial 1         |             |           |
+| Time    |        |             |                    | 1900 ~ 2200 | 1900 ~ 2200        |             |           |
+| Session |        |             |                    | Session 3   | Session 4          |             |           |
+| Venue   |        |             |                    | 4219        | 6602               |             |           |
+| Date    | 3/10   | 4/10        | 5/10               | 6/10        | 7/10               | 8/10        | 9/10      |
+| Event   |        | Tutorial 1  | Tutorial 1         | Tutorial 2  | Tutorial 2         |             |           |
+| Time    |        | 1900 ~ 2200 | 1900 ~ 2200        | 1900 ~ 2200 | 1900 ~ 2200        |             |           |
+| Session |        | Session 1   | Session 2          | Session 3   | Session 4          |             |           |
+| Venue   |        | 6602        | 6602               | 4219        | 6602               |             |           |
+| Date    | 10/10  | 11/10       | 12/10              | 13/10       | 14/10              | 15/10       | 16/10     |
+| Event   |        | Tutorial 2  | Tutorial 2         | Tutorial 3  |                    | Tutorial 3  |           |
+| Time    |        | 1900 ~ 2200 | 1900 ~ 2200        | 1900 ~ 2200 |                    | 1900 ~ 2200 |           |
+| Session |        | Session 1   | Session 2          | Session 3   |                    | Session 4   |           |
+| Venue   |        | 4219        | 6602               | 4219        |                    | 6602        |           |
+| Date    | 17/10  | 18/10       | 19/10              | 20/10       | 21/10              | 22/10       | 23/10     |
+| Event   |        | Tutorial 3  | Tutorial 3         | Tutorial 4  | Tutorial 4         |             |           |
+| Time    |        | 1900 ~ 2200 | 1900 ~ 2200        | 1900 ~ 2200 | 1900 ~ 2200        |             |           |
+| Session |        | Session 1   | Session 2          | Session 3   | Session 4          |             |           |
+| Venue   |        | 4219        | 6602               | 4219        | 6602               |             |           |
+| Date    | 24/10  | 25/10       | 26/10              | 27/10       | 28/10              | 29/10       | 30/10     |
+| Event   |        | Tutorial 4  | Tutorial 4         |             |                    |             |           |
+| Time    |        | 1900 ~ 2200 | 1900 ~ 2200        |             |                    |             |           |
+| Session |        | Session 1   | Session 2          |             |                    |             |           |
+| Venue   |        | 4219        | 6602               |             |                    |             |           |
+| Date    | 31/10  | 1/11        | 2/11               | 3/11        | 4/11               | 5/11        | 6/11      |
+| Event   |        |             |                    |             |                    |             |           |
+| Time    |        |             |                    |             |                    |             |           |
+| Session |        |             |                    |             |                    |             |           |
+| Venue   |        |             |                    |             |                    |             |           |
+| Date    | 7/10   | 8/11        | 9/11               | 10/11       | 11/11              | 12/11       | 13/11     |
+| Event   |        |             | Advance Tutorial 1 |             | Advance Tutorial 1 |             |           |
+| Time    |        |             | 1900 ~ 2200        |             | 1900 ~ 2200        |             |           |
+| Session |        |             | Session 1          |             | Session 2          |             |           |
+| Venue   |        |             | 4219               |             | 2127C              |             |           |
 
 ## Contact
 
