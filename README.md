@@ -49,7 +49,7 @@
 - Kernal
 - Convolution of Image
 
-#### Advanced Tutorial 2 - Communication Protocol 2 and RoboMaster Motor Features:
+#### Advanced Tutorial 2 - Communication Protocol 2 and DJI Brushless Motors Features:
 
 - CAN
 - CAN id
