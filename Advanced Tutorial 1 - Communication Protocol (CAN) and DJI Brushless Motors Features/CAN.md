@@ -289,6 +289,17 @@ Disadvantage:
 Please tell me (Amber) that you want to use which control method and say which group you are from and how many wheels you plan to use. So that I can finish the motor configuration for you.
 :::
 
+# Driving RM through pwm
+We need to keep the RM pwm at the resting on-time which is around 1465~1500(us), it may be different among different set of ESC and board (Please try the value between the range and find one suitable on your machine)
+
+The frequency for controling rm is from 50Hz ~ 500Hz (personally i use 50Hz to do the testing)
+
+If the LED light appears at blink 3 times that means the pwm signal you input isn't low enough, you can try other value, untill it blink at green light(and blink same number as it can id), and then it will stay at rest. Then you can turn the pwm value to other value to perform the work.
+
+The on-time to the speed graph is shown at below.
+
+![](https://i.imgur.com/hSHeZe6.png)
+
 # How many motors for the wheelbase?
 
 - You can choose to use whatever kind of wheelbase(straight wheels or omni-wheels) **Completely optional!!!**
