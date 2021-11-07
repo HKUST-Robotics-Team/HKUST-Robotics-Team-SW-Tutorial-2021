@@ -271,7 +271,7 @@ Disadvantage:
 ##### CAN:
 Advantange:
 
-- Can take encoder feedback so we can perform better control for the motors. (Details: [PID_control_method]())
+- Can take encoder feedback so we can perform better control for the motors. (Details: [PID_control_method](https://www.youtube.com/watch?v=JFTJ2SS4xyA))
 
 Disadvantage:
 
@@ -305,7 +305,7 @@ The on-time to the speed graph is shown at below.
 - You can choose to use whatever kind of wheelbase(straight wheels or omni-wheels) **Completely optional!!!**
 - Straight wheels requires 2 or 4 motors, Omni-wheels requires 3 or more motors
 - Omni-wheel robots can walk in **all direction without rotating** which may make your game flow smoother by a lot.(Depends on the game flow, omni-wheel may not be the best solution for all situations)
-- For more detail. Please refer to: [Omni-wheel: theory and control]()
+- For more detail. Please refer to: [Omni-wheel: theory and control](https://hackmd.io/@yJufOWStQfqucBBAvN7_qA/HJpGNFaXF)
 <br>
 <br>
 <br>
