@@ -88,7 +88,7 @@ void MX_CAN2_Init(void) {
 }
 
 static uint32_t HAL_RCC_CAN1_CLK_ENABLED = 0;
-
+motor_status motor1_stat,motor2_stat,motor3_stat,motor4_stat;
 void HAL_CAN_MspInit(CAN_HandleTypeDef *canHandle) {
 
 	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
@@ -247,7 +247,7 @@ void can_filter_disable(CAN_HandleTypeDef *hcan) {
 }
 
 void can_transmit(CAN_HandleTypeDef *hcan, uint16_t id, int16_t msg1,
-		int16_t msg2, int16_t msg3, int16_t msg4) {
+	int16_t msg2, int16_t msg3, int16_t msg4) {
 	CAN_TxHeaderTypeDef tx_header;
 	uint8_t data[8];
 	uint32_t pTxMailbox;
@@ -272,8 +272,8 @@ void can_transmit(CAN_HandleTypeDef *hcan, uint16_t id, int16_t msg1,
 	}
 }
 
-void can_trigger_motor(int16_t motor1, int16_t motor2, int16_t motor3,
-		int16_t motor4) {
+void CAN_cmd_motor(int16_t motor1, int16_t motor2, int16_t motor3,
+		int16_t motor4, CAN_HandleTypeDef *hcan){
 	/*clockwise if speed if is positive, vice versa.
 	 * Motor Max Speed is 16384.
 	 * CAN ID had been defined for you as the FIRST_GROUP_ID which is 0x200
@@ -300,9 +300,8 @@ void can_trigger_motor(int16_t motor1, int16_t motor2, int16_t motor3,
 	} else if (motor4 < -16384) {
 		motor4 = -16384;
 	}
-	can_transmit(&hcan1, FIRST_GROUP_ID, motor1, motor2, motor3, motor4);
+	can_transmit(hcan, FIRST_GROUP_ID, motor1, motor2, motor3, motor4);
 }
-
 void can_init() {
 	CAN_FilterTypeDef CAN_FilterConfigStructure;
 
@@ -349,6 +348,22 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) {
 
 const motor_measure_t* get_rotate_motor_measure(uint8_t i) {
 	return &motor_chassis[(i & 0x03)];
+}
+void  UpdateMotorStatus(){
+		motor1_stat.speed_rpm = get_rotate_motor_measure(motor1)->speed_rpm; //get motor1 data. It return a struct object pointer.
+		motor2_stat.speed_rpm= get_rotate_motor_measure(motor2)->speed_rpm;
+		motor3_stat.speed_rpm = get_rotate_motor_measure(motor3)->speed_rpm;
+		motor4_stat.speed_rpm = get_rotate_motor_measure(motor4)->speed_rpm;
+
+		motor1_stat.temperature = get_rotate_motor_measure(motor1)->temperate; //get motor1 data. It return a struct object pointer.
+		motor2_stat.temperature = get_rotate_motor_measure(motor2)->temperate;
+		motor3_stat.temperature = get_rotate_motor_measure(motor3)->temperate;
+		motor4_stat.temperature = get_rotate_motor_measure(motor4)->temperate;
+
+		motor1_stat.given_current = get_rotate_motor_measure(motor1)->given_current; //get motor1 data. It return a struct object pointer.
+		motor2_stat.given_current = get_rotate_motor_measure(motor2)->given_current;
+		motor3_stat.given_current = get_rotate_motor_measure(motor3)->given_current;
+		motor4_stat.given_current = get_rotate_motor_measure(motor4)->given_current;
 }
 ;
 /* USER CODE END 1 */
