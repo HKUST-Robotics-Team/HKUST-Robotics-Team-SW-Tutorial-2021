@@ -99,8 +99,7 @@ int main(void) {
     MX_TIM5_Init();
     /* USER CODE BEGIN 2 */
     volatile uint32_t last_ticks = 0;
-    int16_t motorSpeed[4]={0};
-    int16_t motorTemp[4] = {0};
+    extern motor_status motor1_stat,motor2_stat,motor3_stat,motor4_stat;
     // we turn off all the led first
     led_off(LED1);
     led_off(LED2);
@@ -113,25 +112,29 @@ int main(void) {
     /* Infinite loop */
     /* USER CODE BEGIN WHILE */
     while (1) {
-    	HAL_CAN_RxFifo0MsgPendingCallback(&hcan1);
     	if (tft_update(10) == 0) {
-    		tft_prints(0,0,"Time: %d", HAL_GetTick());
-			tft_prints(0,1,"motor1_speed: %d", motorSpeed[motor1]);
-			tft_prints(0,2,"motor1_temp: %d", motorTemp[motor1]);
+			tft_prints(0,0,"m1_spd: %d", motor1_stat.speed_rpm);
+			tft_prints(0,1,"m1_temp: %d", motor1_stat.temperature);
+			tft_prints(0,2,"m1_cur: %d", motor1_stat.given_current);
 		}
         /* USER CODE END WHILE */
-    	motorSpeed[motor1] = get_rotate_motor_measure(motor1)->speed_rpm; //get motor1 data. It return a struct object pointer.
-		motorSpeed[motor2] = get_rotate_motor_measure(motor2)->speed_rpm;
-		motorSpeed[motor3] = get_rotate_motor_measure(motor3)->speed_rpm;
-		motorSpeed[motor4] = get_rotate_motor_measure(motor4)->speed_rpm;
-
-		motorTemp[motor1] = get_rotate_motor_measure(motor1)->temperate; //get motor1 data. It return a struct object pointer.
-		motorTemp[motor2] = get_rotate_motor_measure(motor2)->temperate;
-		motorTemp[motor3] = get_rotate_motor_measure(motor3)->temperate;
-		motorTemp[motor4] = get_rotate_motor_measure(motor4)->temperate;
+    	HAL_CAN_RxFifo0MsgPendingCallback(&hcan1);
+    	UpdateMotorStatus();
         /* USER CODE BEGIN 3 */
         // goto tutorial2_hw.c to do your classwork and homework
-		can_trigger_motor(1000, 100, 100, 100); //minimum value = 1000(?), parameter list(motor1,motor2,motor3,motor4)
+		if(!btn_read(BTN1)){
+			CAN_cmd_motor(1000, 1000, 1000, 1000,&hcan1); //minimum value = 1000(?), parameter list(motor1,motor2,motor3,motor4)
+		}
+		if(btn_read(BTN1)){
+			CAN_cmd_motor(0, 0, 0, 0,&hcan1); //minimum value = 1000(?), parameter list(motor1,motor2,motor3,motor4)
+		}
+		if(!btn_read(BTN2)){
+			CAN_cmd_motor(-1000, -1000, -1000, -1000,&hcan1); //minimum value = 1000(?), parameter list(motor1,motor2,motor3,motor4)
+		}
+		if(btn_read(BTN2)){
+			CAN_cmd_motor(0, 0, 0, 0,&hcan1); //minimum value = 1000(?), parameter list(motor1,motor2,motor3,motor4)
+		}
+
 
         // led blinky - useful for indicating the condition of the board
         if (HAL_GetTick() - last_ticks >= 100) {
