@@ -12,11 +12,13 @@ CAN, Controller area network, is an electronic communication bus defined by the 
 ![](https://i.imgur.com/16oIj5m.png)
 ### Principle of CAN
 Differential Signal
-![ISO11898-2.jpg](https://i.loli.net/2020/03/30/rmacW45kE8Y13T2.jpg)
+![](https://i.imgur.com/PfL9kJR.png)
+
+
 From the above graph, we can observe that, CNA is different from normal signal which using  5V and 0V to represent logic 1 and logic 0. It use differential signal, when there is a difference in voltage, it mean 0 and otherwise meaning 1.
 ADV of Differential signal:
-Noise tolerance
-Accurate timing positioning
+**Noise tolerance
+Accurate timing positioning**
 
 #### Data Frame
 Stanard CAN message (11-bit identifer)
@@ -35,9 +37,12 @@ A CAN data frame can be divided into 8 parts:
 8. End of frame
 
 Normally, we will only focusing on three parts: CAN ID, Control and Data.
-CAN ID: indicating where the data frame should be sent to and who should receiving it.
-Control: Inform the length of data in bytes (0-8).
-Data: Containing Actual data value, which need to be scaled or converted to be readable, e.g. current for motor.
+
+**CAN ID**: indicating where the data frame should be sent to and who should receiving it.
+
+**Control**: Inform the length of data in bytes (0-8).
+
+**Data**: Containing Actual data value, e.g. current for motor.
 
 
 ### STM32 CAN config
@@ -49,70 +54,90 @@ Data: Containing Actual data value, which need to be scaled or converted to be r
 **Clock Config**
 ![](https://i.imgur.com/Edq20yk.png)
 Just make sure the clock config are the same.
-### STM32 HAL library
+### CAN functions
+#### Initialize CAN
+We have create the can object for you. For below example, we are using can1 port and the hcan1 object.
 ```c
-HAL_StatusTypeDef HAL_CAN_Start(CAN_HandleTypeDef *hcan);
+CAN_HandleTypeDef hcan1;
+CAN_HandleTypeDef hcan2;
+----------------------------
+void can_init() {
+	can_filter_enable(&hcan1);
+	HAL_CAN_Start(&hcan1);
+	HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
+}
 ```
-Important Parameters:
-hcan -> point to can object;
+CAN object have been defined for you with the help of STM32HAL library. You only need to use this can_init() function to start CAN.
 
-Return value:
-If successfully launched, return HAL_OK, else HAL_ERROR
+#### Sending CAN message
+The id of the message have been set for you as 0x200.
+
+If we want to run the motor, we have have to add message to our CAN transceiver(Tx). We can use this function
 ```c
-HAL_StatusTypeDef HAL_CAN_ConfigFilter(CAN_HandleTypeDef *hcan, CAN_FilterTypeDef *sFilterConfig);
+void CAN_cmd_motor(int16_t motor1, int16_t motor2, int16_t motor3,
+		int16_t motor4, CAN_HandleTypeDef *hcan)
+    // for motors, value range from -16384 to 16384
 ```
-Important Parameters:
-hcan -> point to can object;
-sFilterConfig -> point to filter object;
-
-Return value:
-If successfully launched, return HAL_OK, else HAL_ERROR
+Assuming we are using 4 motor, we can assign different current value to each motor. As we are using CAN1 port, we are going to pass the address of hcan1(&hcan1) in to the function. The current value to be sent to the motor can be seen as the torque of the motor.
+#### Retrieving CAN message
+We have created 4 variable(Assuming we are using four motor) for you to use, 
+motor1_stat, motor2_stat, motor3_stat, motor4_stat, all are objects of the struct as shown below.
 ```c
-HAL_StatusTypeDef HAL_CAN_AddTxMessage(CAN_HandleTypeDef *hcan, CAN_TxHeaderTypeDef *pHeader, uint8_t aData[], uint32_t *pTxMailbox);
+typedef struct{
+    int16_t     speed_rpm; //speed rpm = number of turns per 1 min
+    int16_t     given_current;//given current for the motor
+    uint8_t     temperature;//temperature of the motor
+}   motor_status;
 ```
-Important Parameters:
-hcan -> point to can object;
-pHeader -> the can id that the message should be sent to.
-aData -> data to be sent
+To retreive data from CAN bus, use the interrupt function below. Whenever a message is arrived to the CAN receiver(Rx), it will help you collect it.
+```c
+HAL_CAN_RxFifo0MsgPendingCallback(&hcan1);
+```
+Parameter: address of the can object. 
+As we are using CAN1 port on our board, we are giving the address of the CAN1 object to this function.
 
-Return value:
-If message successfully added, return HAL_OK, else HAL_ERROR.
+To assign the received data to varaible motor1_stat etc. Use...
+```c
+void UpdateMotorStatus()
+```
 
-These are some common HAL function that will be used in CAN communication.
-A library using these HAL functions are written for you to use to control motors.
-Example code will be shown below.
 ### Example code
-You will use can_trigger_motor to control your motor. Please read the code below;
+The code below shows you how to retrieve and send CAN message at the same time. This will rotate your motor in clockwise.
 ```c
-void can_trigger_motor(int16_t speed){
-	/* motor rotate clockwise if speed is positive, vice versa.
-	 * CAN ID have been defined for you 
-	 * as FIRST_GROUP_ID which is 0x200
-	 * Motor Max Speed is 16384.
-	 * */
-	if(speed>16384){
-		speed = 16384;
-	}else if (speed<-16384){
-		speed = -16384;
-	}
-can_transmit(&hcan1,FIRST_GROUP_ID,speed,speed,speed,speed);
-}
-```
-In the main.c, you need to start the CAN object and disable the can-filter before entering the while loop. So that your can object can help you deliver your data.
-```c
-can_filter_disable(&hcan1);
-HAL_CAN_Start(&hcan1);
-```
-After that, you can control the motor by invoking the can_trigger_motor function in the while loop
-
-```c
-while(1){
-    can_trigger_motor(100);
-}
-```
-This will keep your motor keep rotating clockwise.
+//In main.c
+can_init();
+while (1) {
+    	if (tft_update(10) == 0) {
+			tft_prints(0,0,"m1_spd: %d", motor1_stat.speed_rpm);
+			tft_prints(0,1,"m1_temp: %d", motor1_stat.temperature);
+			tft_prints(0,2,"m1_cur: %d", motor1_stat.given_current);
+		}
+        /* USER CODE END WHILE */
+    	HAL_CAN_RxFifo0MsgPendingCallback(&hcan1);
+    	UpdateMotorStatus();
+        /* USER CODE BEGIN 3 */
+        // goto tutorial2_hw.c to do your classwork and homework
+		if(!btn_read(BTN1)){
+			CAN_cmd_motor(1000, 1000, 1000, 1000,&hcan1); //rotate clockwise, parameter list(motor1,motor2,motor3,motor4)
+		}
+		if(btn_read(BTN1)){
+			CAN_cmd_motor(0, 0, 0, 0,&hcan1); //remember to set it back to 0 once you don't want to run the motor.
+		}
+		if(!btn_read(BTN2)){
+			CAN_cmd_motor(-1000, -1000, -1000, -1000,&hcan1); //rotate in anti clockwise.
+		}
+		if(btn_read(BTN2)){
+			CAN_cmd_moor(0, 0, 0, 0,&hcan1); 
+		}
 
 
+        // led blinky - useful for indicating the condition of the board
+        if (HAL_GetTick() - last_ticks >= 100) {
+            led_toggle(LED4);
+            last_ticks = HAL_GetTick();
+        }
+    }
+```
 
 ## RM motor features
 
