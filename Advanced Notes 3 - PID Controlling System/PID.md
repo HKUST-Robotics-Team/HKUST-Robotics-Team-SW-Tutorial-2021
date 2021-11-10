@@ -212,3 +212,13 @@ If you still do not understand how to write programs to try the game, feel free 
 There are several different games provided in the above website. Feel free to explore by yourself and try each of them out using the PID Controlling System.
 
 (By the way, it only takes 0.4s for the Block to go to its destination in Tutorial #1 and Tutorial #2 and it only takes 1.16s for the Block to go to its destination in Tutorial #3 for me (Of course I am not cheating! I really tune the PID Controlling System by myself!). You are very welcome to challenge me and tell me your best record.)
+
+## References
+
+You can go and watch this Youtube Video to further understand PID Controller if you still do not understand what PID is after reading this notes:
+
+[What is PID Control?](https://www.youtube.com/watch?v=wkfEZmsQqiA&t=597s&ab_channel=MATLAB)
+
+If you want to watch some real examples of PID application, this is a good video for you:
+
+[PID Demo](https://www.youtube.com/watch?v=qKy98Cbcltw&ab_channel=Horizon4electronics)
