@@ -115,7 +115,7 @@
 | Tutor / Helper | Email                      | Phone     |
 | -------------- | -------------------------- | --------- |
 | Astral         | cytangar@connect.ust.hk    | 6090 8610 |
-| Oacar          | owidjaja@connect.ust.hk    | 5640 0464 |
+| Oscar          | owidjaja@connect.ust.hk    | 5640 0464 |
 | Elwin          | kyeliaa@connect.ust.hk     | 5431 9833 |
 | Leo            | lywongav@connect.ust.hk    | 5532 5671 |
 | Amber          | yytangad@connect.ust.hk    | 9614 7998 |
