@@ -13,6 +13,8 @@ Updated by: Ho Yu Yat (yyhoai@connect.ust.hk) (2019)
 Updated by: Tang Pok Lam (pltangab@connect.ust.hk) (2020)
 
 Stolen and Updated by: Tang Cheuk Yu (cytangar@connect.ust.hk) (2021)
+## Classwork
+https://hackmd.io/@qCsT7FCjT96JL1XgJ2BF2g/B1-GCFyut
 ## What is an image?
 Before we start, it is crucial to understand what an image is. A representation of an image in computer is actually very similar to a spreadsheet. In fact, you can view a image with a spreadsheet application. Take a look at [this spreadsheet](https://docs.google.com/spreadsheets/d/1iv-KJNuuUdBp-KXYhekPpTvZKWijySFD/edit?usp=sharing&ouid=100783747747020416812&rtpof=true&sd=true)  for an example.
 ![](https://i.imgur.com/Ic9KcYq.png)
