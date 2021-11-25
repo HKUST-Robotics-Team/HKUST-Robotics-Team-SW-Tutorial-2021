@@ -134,7 +134,6 @@ static inline uint8_t SCCB_RxByte(void) {
 }
 
 SCCBState SCCB_send_byte(uint16_t WriteAddress, uint8_t SendByte) {
-	__disable_irq();
 	if (!SCCB_start()) {
 		return SCCB_FAIL;
 	}
@@ -148,12 +147,10 @@ SCCBState SCCB_send_byte(uint16_t WriteAddress, uint8_t SendByte) {
 	SCCB_TxByte(SendByte);
 	SCCB_waitAck();
 	SCCB_stop();
-	__enable_irq();
 	return SCCB_OK;
 }
 
 SCCBState SCCB_read_byte(uint8_t addr, uint8_t* buf, uint16_t len) {
-	__disable_irq();
 	if (!SCCB_start()) {
 		return SCCB_FAIL;
 	}
@@ -185,6 +182,5 @@ SCCBState SCCB_read_byte(uint8_t addr, uint8_t* buf, uint16_t len) {
 		len--;
 	}
 	SCCB_stop();
-	__enable_irq();
 	return SCCB_OK;
 }
